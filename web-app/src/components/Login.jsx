@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getToken } from "../services/localStorageService";
 
+// Đây là trang login xử lý khi click vào Continue with Google
 export default function Login() {
   const navigate = useNavigate();
 
@@ -22,6 +23,10 @@ export default function Login() {
     const authUrl = OAuthConfig.authUri;
     const googleClientId = OAuthConfig.clientId;
 
+    // Khi click vào Continue with Google nó sẽ redirect đến trang bên dưới theo format của google
+    // Xem quy định format ở: https://developers.google.com/identity/protocols/oauth2/javascript-implicit-flow?hl=vi
+    // Tìm mục for JavaScript Web Apps phần Parameters xem các tham số cần có
+    // redirect_uri chính là endpoint mà sau khi google sẽ redirect đến, trong trường hợp này redirect_uri chính là Authentication.jsx
     const targetUrl = `${authUrl}?redirect_uri=${encodeURIComponent(
       callbackUrl
     )}&response_type=token&client_id=${googleClientId}&scope=openid%20email%20profile`;

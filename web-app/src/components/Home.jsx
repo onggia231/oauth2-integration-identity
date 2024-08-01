@@ -4,15 +4,21 @@ import { getToken } from "../services/localStorageService";
 import Header from "./header/Header";
 import { Box, Card, CircularProgress, Typography } from "@mui/material";
 
+// Đây là trang được bảo vệ và yêu cần có token mới đăng nhập vào được vào thì sẽ chuyển đến trang login
 export default function Home() {
   const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState({});
 
+  // Sau khi login rồi sẽ gọi api đến google
   const getUserDetails = async (accessToken) => {
     const response = await fetch(
-      `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${accessToken}`
+      `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${accessToken}` // accessToken đã nhận được từ Authenticate để gửi request đi
     );
+
+    // Sau khi gửi request trên đi thì sẽ nhận được thông tin data dưới
     const data = await response.json();
+
+    console.log(data);
     
     setUserDetails(data);
   };
@@ -20,6 +26,7 @@ export default function Home() {
   useEffect(() => {
     const accessToken = getToken();
 
+    // chưa đăng nhập nó nhảy đến login
     if (!accessToken) {
       navigate("/login");
     }

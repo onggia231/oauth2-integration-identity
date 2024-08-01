@@ -68,3 +68,20 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Các bước cài để lấy client id
+1. Truy cập: https://console.cloud.google.com/welcome?_ga=2.131647823.1729457257.1722487233-718716992.1722487127&project=booming-premise-337208 (Nơi tạo project làm việc với Google)
+2. Tạo 1 project có tên Devteria và vào mục APIs & Services
+3. Chọn Credentials ( Đây là nơi làm việc với OAuth 2.0)
+4. Chọn CREATE CREDENTIALS và chọn tiếp OAuth client ID ( Tạo client Id)
+5. Chọn Configure consent screen -> Tích
+   External -> Creat
+6. Điền mục App name, User support email, Developer contact information -> SAVE AND CONTINUE liên tục
+7. OAuth consent screen -> PUBLISH APP
+8. Quay lại mục Credentials ( có thể tạo được 1 Credentials mới )
+9. Credentials -> CREATE CREDENTIALS -> OAuth client ID
+   -> Application type (chọn Web application), Name (Devteria web-app)
+   -> Authorized JavaScript origins (http://localhost:3000) # Điền url ban đầu và có thể thêm nhiều url ở mục này
+   -> Authorized redirect URIs (http://localhost:3000/authenticate) # Nó sẽ redirect khi login được, cũng có thể khai nhiều url mục này
+10. Chọn Create để tạo, n sẽ sinh ra Dialog OAuth client created có thông tin Client ID, Client secret ( 2 thông tin này quan trọng không để public)
+
