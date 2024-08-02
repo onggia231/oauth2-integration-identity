@@ -29,7 +29,7 @@ export default function Login() {
     // redirect_uri chính là endpoint mà sau khi google sẽ redirect đến, trong trường hợp này redirect_uri chính là Authentication.jsx
     const targetUrl = `${authUrl}?redirect_uri=${encodeURIComponent(
       callbackUrl
-    )}&response_type=token&client_id=${googleClientId}&scope=openid%20email%20profile`;
+    )}&response_type=code&client_id=${googleClientId}&scope=openid%20email%20profile`;
 
     console.log(targetUrl);
 

@@ -25,6 +25,7 @@ import lombok.experimental.FieldDefaults;
 public class AuthenticationController {
     AuthenticationService authenticationService;
 
+    // Gui den google de lay token roi tu day giao tiep voi google qua token ay
     @PostMapping("/outbound/authentication")
     ApiResponse<AuthenticationResponse> outboundAuthenticate(
             @RequestParam("code") String code

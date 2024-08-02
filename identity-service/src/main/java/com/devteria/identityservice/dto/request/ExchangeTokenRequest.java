@@ -15,10 +15,14 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class ExchangeTokenRequest {
+public class ExchangeTokenRequest { // request gui theo format doc
     String code;
     String clientId;
     String clientSecret;
     String redirectUri;
     String grantType;
 }
+
+// Sử dụng @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class) -> de chuyen tu camelCase -> snake_case
+// Trong java convention cua no la camelCase nhưng format tham so cua Google la snake_case
+// -> Nên phải dung JsonNaming để chuyển tu camelCase -> snake_case để convert giao tiếp với Google

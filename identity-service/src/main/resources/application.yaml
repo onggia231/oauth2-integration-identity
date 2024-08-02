@@ -14,13 +14,16 @@ spring:
       ddl-auto: update
     show-sql: true
 
+# Nhung thong tin ben duoi quan trong nen se dung bien local de khong day len github
 outbound:
   identity:
-    client-id: "<clientId>"
-    client-secret: "<clientSecret>"
-    redirect-uri: "http://localhost:3000/authenticate"
+    client-id: ${CLIENT_ID}
+    client-secret: ${CLIENT_SECRET}
+    redirect-uri: ${REDIRECT_URI}
+
 
 jwt:
   signerKey: "1TjXchw5FloESb63Kc+DFhTARvpWL4jUGCwfGWxuG5SIf/1y/LgJxHnMqaF6A/ij"
   valid-duration: 3600 # in second
   refreshable-duration: 36000 # in seconds
+
