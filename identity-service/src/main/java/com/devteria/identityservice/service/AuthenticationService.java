@@ -96,6 +96,7 @@ public class AuthenticationService {
 
         log.info("TOKEN RESPONSE {}", response);
 
+        // get user cua google
         // json la tham so mac dinh khi goi den api cua google
         // https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${accessToken}
         var userInfo = outboundUserClient.getUserInfo("json", response.getAccessToken());
@@ -105,6 +106,7 @@ public class AuthenticationService {
         Set<Role> roles = new HashSet<>();
         roles.add(Role.builder().name(PredefinedRole.USER_ROLE).build());
 
+        // Onboard user
         // luu thong tin gmail da login vao database
         var user = userRepository.findByUsername(userInfo.getEmail()).orElseGet(
                 () -> userRepository.save(User.builder()
@@ -114,8 +116,17 @@ public class AuthenticationService {
                         .roles(roles)
                         .build()));
 
+        // chuyen thong tin user cua google thanh thong tin cua he thong de co the truy cap
+        var token = generateToken(user);
+
+        // return token cua google
+//        return AuthenticationResponse.builder()
+//                .token(response.getAccessToken())
+//                .build();
+
+        // return token cua user
         return AuthenticationResponse.builder()
-                .token(response.getAccessToken())
+                .token(token)
                 .build();
     }
 
