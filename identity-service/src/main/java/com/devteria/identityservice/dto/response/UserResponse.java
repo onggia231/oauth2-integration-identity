@@ -17,5 +17,6 @@ public class UserResponse {
     String firstName;
     String lastName;
     LocalDate dob;
+    Boolean noPassword; // noPassword: false (da co password), true (chua co password)
     Set<RoleResponse> roles;
 }

@@ -1,20 +1,22 @@
 import {
+  Alert,
   Box,
   Button,
   Card,
   CardActions,
   CardContent,
   Divider,
+  Snackbar,
   TextField,
   Typography,
 } from "@mui/material";
+
 import GoogleIcon from "@mui/icons-material/Google";
 import { OAuthConfig } from "../configurations/configuration";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getToken, setToken } from "../services/localStorageService";
 
-// Đây là trang login xử lý khi click vào Continue with Google
 export default function Login() {
   const navigate = useNavigate();
 
@@ -46,8 +48,30 @@ export default function Login() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [snackBarOpen, setSnackBarOpen] = useState(false);
+  const [snackBarMessage, setSnackBarMessage] = useState("");
+  const [snackType, setSnackType] = useState("error");
 
-  // Click btn Login
+  const handleCloseSnackBar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setSnackBarOpen(false);
+  };
+
+  const showError = (message) => {
+    setSnackType("error");
+    setSnackBarMessage(message);
+    setSnackBarOpen(true);
+  };
+
+  const showSuccess = (message) => {
+    setSnackType("success");
+    setSnackBarMessage(message);
+    setSnackBarOpen(true);
+  };
+
   const handleLogin = (event) => {
     event.preventDefault();
 
@@ -69,13 +93,33 @@ export default function Login() {
         .then((data) => {
           console.log(data);
 
+          if (data.code !== 1000) throw new Error(data.message);
+
           setToken(data.result?.token);
           navigate("/");
+        })
+        .catch((error) => {
+          showError(error.message);
         });
   };
 
   return (
       <>
+        <Snackbar
+            open={snackBarOpen}
+            onClose={handleCloseSnackBar}
+            autoHideDuration={6000}
+            anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        >
+          <Alert
+              onClose={handleCloseSnackBar}
+              severity={snackType}
+              variant="filled"
+              sx={{ width: "100%" }}
+          >
+            {snackBarMessage}
+          </Alert>
+        </Snackbar>
         <Box
             display="flex"
             flexDirection="column"
