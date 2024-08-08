@@ -1,6 +1,5 @@
 package com.devteria.identityservice.repository.httpclient;
 
-import com.devteria.identityservice.dto.response.ExchangeTokenResponse;
 import com.devteria.identityservice.dto.response.OutboundUserResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

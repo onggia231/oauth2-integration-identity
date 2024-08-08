@@ -85,3 +85,25 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
    -> Authorized redirect URIs (http://localhost:3000/authenticate) # Nó sẽ redirect khi login được, cũng có thể khai nhiều url mục này
 10. Chọn Create để tạo, n sẽ sinh ra Dialog OAuth client created có thông tin Client ID, Client secret ( 2 thông tin này quan trọng không để public)
 
+## Xem thong tin json
+1. Chon Project Devteria da tao -> Credentials -> OAuth 2.0 Client IDs (Chon name project) -> Click icon cham than !
+   {
+   "web":{
+   "client_id":"...................apps.googleusercontent.com", // Xác định application là ai
+   "project_id":"devteria-431204",
+   "auth_uri":"https://accounts.google.com/o/oauth2/auth", // địa chỉ chuẩn để lấy thông tin
+   "token_uri":"https://oauth2.googleapis.com/token",
+   "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs", // verify token
+   "client_secret":"...................", // không được lộ
+   "redirect_uris":["http://localhost:3000/authenticate"],
+   "javascript_origins":["http://localhost:3000"]
+   }
+   }
+
+## Luu y 
+1. Khi test api: http://localhost:8080/identity/auth/outbound/authentication?code=.....
+-> Muon call api nay tu postman thi comment doan fetch goi api nay tu frontend (Authenticate.jsx) di vi code chi call duoc 1 lan thoi
+2. Moi lan login gmail tu frontend no se lay thong tin va tao 1 tai khoan user moi (Voi username la gmail: ....@gmail.com)
+3. De tao password de co the dang nhap bang user password thi call api createPassword (http://localhost:8080/identity/users/create-password)
+-> Auth Type cua api tren: Lay tu Authorization (myInfo - Network) khi minh login gmail
+
